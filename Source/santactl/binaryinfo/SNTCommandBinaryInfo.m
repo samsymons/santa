@@ -62,9 +62,12 @@ REGISTER_COMMAND_NAME(@"binaryinfo")
   printf("%-19s: %s\n", "Path", [[fileInfo path] UTF8String]);
   printf("%-19s: %s\n", "SHA-256", [[fileInfo SHA256] UTF8String]);
   printf("%-19s: %s\n", "SHA-1", [[fileInfo SHA1] UTF8String]);
-  printf("%-19s: %s\n", "Bundle Name", [[fileInfo bundleName] UTF8String]);
-  printf("%-19s: %s\n", "Bundle Version", [[fileInfo bundleVersion] UTF8String]);
-  printf("%-19s: %s\n", "Bundle Version Str", [[fileInfo bundleShortVersionString] UTF8String]);
+
+  if ([fileInfo bundle]) {
+    printf("%-19s: %s\n", "Bundle Name", [[fileInfo bundleName] UTF8String]);
+    printf("%-19s: %s\n", "Bundle Version", [[fileInfo bundleVersion] UTF8String]);
+    printf("%-19s: %s\n", "Bundle Version Str", [[fileInfo bundleShortVersionString] UTF8String]);
+  }
 
   NSArray *archs = [fileInfo architectures];
   if (archs) {
