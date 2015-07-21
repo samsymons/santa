@@ -72,13 +72,22 @@ REGISTER_COMMAND_NAME(@"version")
 
 + (NSString *)santadVersion {
   SNTFileInfo *daemonInfo = [[SNTFileInfo alloc] initWithPath:@(kSantaDPath)];
-  return daemonInfo.bundleVersion;
+
+  if (daemonInfo) {
+    return daemonInfo.bundleVersion;
+  }
+
+  return @"not found";
 }
 
 + (NSString *)santaAppVersion {
-  SNTFileInfo *guiInfo =
-      [[SNTFileInfo alloc] initWithPath:@"/Applications/Santa.app/Contents/MacOS/Santa"];
-  return guiInfo.bundleVersion;
+  SNTFileInfo *guiInfo = [[SNTFileInfo alloc] initWithPath:@"/Applications/Santa.app/Contents/MacOS/Santa"];
+
+  if (guiInfo) {
+    return guiInfo.bundleVersion;
+  }
+
+  return @"not found";
 }
 
 + (NSString *)santactlVersion {
